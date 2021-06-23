@@ -1,7 +1,10 @@
 package com.adammcneilly.composeinterropsample
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.Surface
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.adammcneilly.composeinterropsample.databinding.ActivityCounterBinding
@@ -17,10 +20,20 @@ class CounterActivity : AppCompatActivity() {
         binding = ActivityCounterBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(CounterViewModel::class.java)
 
-        setContentView(binding.root)
-        subscribeToViewModel()
+        setContent {
+            val state = viewModel.viewState.collectAsState()
 
-        setupButton()
+            Surface {
+                CounterScreen(
+                    viewState = state.value,
+                    onIncrementButtonClicked = viewModel::counterButtonClicked
+                )
+            }
+        }
+//        setContentView(binding.root)
+//        subscribeToViewModel()
+//
+//        setupButton()
     }
 
     private fun setupButton() {
