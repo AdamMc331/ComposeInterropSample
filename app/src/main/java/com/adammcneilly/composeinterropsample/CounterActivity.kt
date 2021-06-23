@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.adammcneilly.composeinterropsample.databinding.ActivityCounterBinding
@@ -24,10 +25,16 @@ class CounterActivity : AppCompatActivity() {
             val state = viewModel.viewState.collectAsState()
 
             Surface {
-                CounterScreen(
-                    viewState = state.value,
-                    onIncrementButtonClicked = viewModel::counterButtonClicked
-                )
+                AndroidViewBinding(ActivityCounterBinding::inflate) {
+                    this.counterButton.buttonText = getString(R.string.increment)
+                    this.counterText.text = getString(R.string.counter_value, state.value.count)
+
+                    this.counterButton.onClick = viewModel::counterButtonClicked
+                }
+//                CounterScreen(
+//                    viewState = state.value,
+//                    onIncrementButtonClicked = viewModel::counterButtonClicked
+//                )
             }
         }
 //        setContentView(binding.root)
