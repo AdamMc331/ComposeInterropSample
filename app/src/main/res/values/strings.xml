@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ComposeInterropSample</string>
+    <string name="counter_value">Count: %d</string>
+    <string name="increment">Increment</string>
+</resources>
