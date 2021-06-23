@@ -4,6 +4,12 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
+/**
+ * This controls all of the UI behavior for our counter screen.
+ *
+ * The [viewState] is a [StateFlow] that emits the configuration of our screen, and [counterButtonClicked]
+ * is responsible for updating the count of our state.
+ */
 class CounterViewModel : ViewModel() {
     private val _viewState = MutableStateFlow(
         CounterViewState(0)
