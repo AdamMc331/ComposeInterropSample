@@ -19,13 +19,13 @@ class CounterActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         subscribeToViewModel()
-        setClickListeners()
+
+        setupButton()
     }
 
-    private fun setClickListeners() {
-        binding.counterButton.setOnClickListener {
-            viewModel.counterButtonClicked()
-        }
+    private fun setupButton() {
+        binding.counterButton.buttonText = getString(R.string.increment)
+        binding.counterButton.onClick = viewModel::counterButtonClicked
     }
 
     private fun subscribeToViewModel() {
